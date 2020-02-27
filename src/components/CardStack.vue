@@ -14,6 +14,9 @@
 import Card from "./Card";
 export default {
   name: "CardStack",
+  props: {
+    cardDetail: Object
+  },
   components: { Card },
   computed: {
     cards() {

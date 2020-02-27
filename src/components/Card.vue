@@ -2,21 +2,25 @@
   <div
     @click="$emit('swap-card', cardDetail)"
     class="card"
-    :style="{'background-color': cardDetail.bgColor}"
+    :style="{ 'background-color': cardDetail.bgColor }"
   >
     <div class="vendor">
       <img :src="cardDetail.chip" alt="vendor" />
       <img :src="cardDetail.vendor" alt="vendor" />
     </div>
-    <h1>{{cardDetail.cardNumber}}</h1>
+    <h1>{{ cardDetail.cardNumber }}</h1>
     <ul>
       <li>
         <p>Cardholder name</p>
-        <h2>{{cardDetail.ownerName}}</h2>
+        <h2>{{ cardDetail.ownerName }}</h2>
       </li>
       <li>
         <p>Valid thru</p>
-        <h2>{{cardDetail.validThru}}</h2>
+        <div>
+          <h2>{{ cardDetail.month }}</h2>
+          <h2>/</h2>
+          <h2>{{ cardDetail.year }}</h2>
+        </div>
       </li>
     </ul>
   </div>
@@ -62,12 +66,26 @@ export default {
     justify-content: space-between;
 
     li {
+      p {
+        font-size: 0.9rem;
+      }
       p,
       h2 {
         text-transform: uppercase;
       }
+
+      h2 {
+        font-size: 1.2rem;
+      }
+
       &:nth-child(2) {
         text-align: right;
+        div {
+          text-align: right;
+          h2 {
+            display: inline;
+          }
+        }
       }
     }
   }

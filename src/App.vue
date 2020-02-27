@@ -19,5 +19,6 @@ export default {
 }
 body {
   background: #eee;
+  font-family: "Poppins";
 }
 </style>

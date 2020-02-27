@@ -4,7 +4,7 @@
     <h3>Active card</h3>
     <Card :cardDetail="cardDetail" />
     <CardStack @swap-card="swapCard" />
-    <router-link to="/add-card">Add new card</router-link>
+    <router-link class="btn-primary" to="/add-card">Add new card</router-link>
   </div>
 </template>
 
@@ -21,7 +21,8 @@ export default {
       vendor: require("../assets/vendor-bitcoin.svg"),
       cardNumber: "1234 5678 9101 1123",
       ownerName: "Aleksander Dimitrijevic",
-      validThru: "12/22",
+      month: "10",
+      year: "20",
       bgColor: "#ffb649"
     }
   }),
@@ -48,26 +49,26 @@ export default {
     margin-bottom: 0.5rem;
     text-transform: uppercase;
   }
+}
 
-  a {
-    width: 80%;
-    margin: auto;
-    padding: 20px;
-    color: #000;
-    display: block;
-    transition: 0.3s;
-    font-weight: bold;
-    font-size: 1.3rem;
-    border-radius: 5px;
-    text-align: center;
-    text-decoration: none;
-    border: 2px solid #000;
-    text-transform: uppercase;
+.btn-primary {
+  width: 80%;
+  margin: auto;
+  padding: 20px;
+  color: #000;
+  display: block;
+  transition: 0.3s;
+  font-weight: bold;
+  font-size: 1.3rem;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  border: 2px solid #000;
+  text-transform: uppercase;
 
-    &:hover {
-      color: #fff;
-      background: #000;
-    }
+  &:hover {
+    color: #fff;
+    background: #000;
   }
 }
 </style>

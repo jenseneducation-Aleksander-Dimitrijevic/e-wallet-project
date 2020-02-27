@@ -1,5 +1,5 @@
 <template>
-  <form>
+  <form @submit.prevent="addCard">
     <label for="card-number">Card number</label>
     <input
       id="card-number"
@@ -13,35 +13,46 @@
     <input type="text" id="name" v-model="cardDetail.ownerName" placeholder="Firstname Lastname" />
     <div>
       <div>
-        <label for="valid-thru">Valid thru</label>
-        <select v-model="cardDetail.validThru" id="valid-thru">
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-          <option value="6">6</option>
-          <option value="7">7</option>
-          <option value="8">8</option>
-          <option value="9">9</option>
+        <label for="month">Month</label>
+        <select v-model="cardDetail.month" id="month">
+          <option value="01">01</option>
+          <option value="02">02</option>
+          <option value="03">03</option>
+          <option value="04">04</option>
+          <option value="05">05</option>
+          <option value="06">06</option>
+          <option value="07">07</option>
+          <option value="08">08</option>
+          <option value="09">09</option>
           <option value="10">10</option>
           <option value="11">11</option>
           <option value="12">12</option>
         </select>
       </div>
       <div>
-        <label for="cvv">Ccv</label>
-        <input type="text" id="cvv" maxlength="3" v-model="cardDetail.cvv" />
+        <label for="year">Year</label>
+        <select v-model="cardDetail.year" id="year">
+          <option value="21">21</option>
+          <option value="22">22</option>
+          <option value="23">23</option>
+          <option value="24">24</option>
+          <option value="25">25</option>
+        </select>
       </div>
     </div>
 
     <label for="vendor">Vendor</label>
-    <select id="vendor" v-model="cardDetail.vendorOptions">
+    <select
+      id="vendor"
+      v-model="cardDetail.vendorOptions"
+      @change="$emit('select', cardDetail.vendorOptions)"
+    >
       <option value="bitcoin-inc">Bitcoin Inc</option>
       <option value="blockchain-inc">Blockchain Inc</option>
       <option value="evil-corp">Evil Corp</option>
       <option value="ninja-bank">Ninja Bank</option>
     </select>
+    <button class="btn-primary">Add card</button>
   </form>
 </template>
 
@@ -50,6 +61,12 @@ export default {
   name: "CardForm",
   props: {
     cardDetail: Object
+  },
+  methods: {
+    addCard() {
+      this.$root.$emit("add-card", this.cardDetail);
+      this.$router.go(-1);
+    }
   }
 };
 </script>
@@ -69,6 +86,10 @@ form {
     display: flex;
     justify-content: space-between;
 
+    select {
+      width: 190px;
+    }
+
     div {
       display: flex;
       flex-flow: column;
@@ -76,11 +97,19 @@ form {
   }
 
   input,
-  select {
+  select,
+  button {
     width: 100%;
     padding: 12px;
     border-radius: 5px;
     border: 1px solid #ccc;
+  }
+
+  button {
+    padding: 20px;
+    cursor: pointer;
+    margin-top: 1rem;
+    background: #fff;
   }
 }
 </style>

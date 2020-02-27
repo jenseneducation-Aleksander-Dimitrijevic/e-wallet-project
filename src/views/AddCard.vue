@@ -3,7 +3,7 @@
     <Top heading="Add a new bank card" />
     <h3>New card</h3>
     <Card :cardDetail="cardDetail" />
-    <CardForm :cardDetail="cardDetail" />
+    <CardForm @select="changeBgColor" :cardDetail="cardDetail" />
   </div>
 </template>
 
@@ -16,16 +16,37 @@ export default {
   components: { Top, Card, CardForm },
   data: () => ({
     cardDetail: {
+      id: Date.now(),
       chip: require("../assets/chip-light.svg"),
       vendor: require("../assets/vendor-bitcoin.svg"),
       cardNumber: "",
       ownerName: "",
-      validThru: "",
+      month: "",
+      year: "",
       vendorOptions: null,
-      cvv: "",
       bgColor: "#ccc"
     }
-  })
+  }),
+  methods: {
+    changeBgColor(vendor) {
+      if (vendor === "ninja-bank") {
+        this.cardDetail.bgColor = "#000";
+        this.cardDetail.vendor = require("../assets/vendor-ninja.svg");
+      }
+      if (vendor === "evil-corp") {
+        this.cardDetail.bgColor = "#D92E4C";
+        this.cardDetail.vendor = require("../assets/vendor-evil.svg");
+      }
+      if (vendor === "blockchain-inc") {
+        this.cardDetail.bgColor = "#7C4FDF";
+        this.cardDetail.vendor = require("../assets/vendor-blockchain.svg");
+      }
+      if (vendor === "bitcoin-inc") {
+        this.cardDetail.bgColor = "#ffb649";
+        this.cardDetail.vendor = require("../assets/vendor-bitcoin.svg");
+      }
+    }
+  }
 };
 </script>
 
