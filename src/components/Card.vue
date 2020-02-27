@@ -40,8 +40,10 @@ export default {
   color: #fff;
   flex-flow: column;
   border-radius: 10px;
+  backface-visibility: hidden;
   justify-content: space-between;
   box-shadow: 0 0 10px rgba(#000, 0.2);
+  text-shadow: 0 0 5px rgba(#000, 0.4);
   .vendor {
     display: flex;
     align-items: center;
@@ -60,7 +62,8 @@ export default {
     justify-content: space-between;
 
     li {
-      p {
+      p,
+      h2 {
         text-transform: uppercase;
       }
       &:nth-child(2) {
