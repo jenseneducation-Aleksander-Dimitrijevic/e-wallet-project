@@ -36,7 +36,7 @@ export default {
     transition: 0.3s;
 
     &:hover {
-      transform: scale(1.03);
+      transform: translateY(-20px);
     }
   }
 }

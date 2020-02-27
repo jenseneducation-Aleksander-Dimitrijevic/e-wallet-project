@@ -43,6 +43,7 @@ new Vue({
   mounted() {
     this.$root.$on("add-card", data => {
       this.cards.push(data);
+      console.log(data);
     });
   },
   render: h => h(App)
