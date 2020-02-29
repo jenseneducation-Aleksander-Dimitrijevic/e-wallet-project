@@ -8,7 +8,7 @@
       <img :src="cardDetail.chip" alt="vendor" />
       <img :src="cardDetail.vendor" alt="vendor" />
     </div>
-    <h1>{{ splitStr }}</h1>
+    <h1 v-if="cardDetail.cardNumber">{{ splitStr }}</h1>
     <ul>
       <li>
         <p>Cardholder name</p>
