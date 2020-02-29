@@ -8,7 +8,7 @@
       <img :src="cardDetail.chip" alt="vendor" />
       <img :src="cardDetail.vendor" alt="vendor" />
     </div>
-    <h1>{{ cardDetail.cardNumber }}</h1>
+    <h1>{{ splitStr }}</h1>
     <ul>
       <li>
         <p>Cardholder name</p>
@@ -18,7 +18,7 @@
         <p>Valid thru</p>
         <div>
           <h2>{{ cardDetail.month }}</h2>
-          <h2>/</h2>
+          <h2 v-show="cardDetail.year">/</h2>
           <h2>{{ cardDetail.year }}</h2>
         </div>
       </li>
@@ -29,7 +29,14 @@
 <script>
 export default {
   name: "Card",
-  props: ["cardDetail"]
+  props: ["cardDetail"],
+  computed: {
+    splitStr() {
+      let ccNum = this.cardDetail.cardNumber;
+      let ccNumSpaces = ccNum.match(/.{1,4}/g);
+      return ccNumSpaces.join(" ");
+    }
+  }
 };
 </script>
 

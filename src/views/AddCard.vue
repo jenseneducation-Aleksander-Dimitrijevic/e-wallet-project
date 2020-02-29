@@ -21,8 +21,8 @@ export default {
       vendor: require("../assets/vendor-bitcoin.svg"),
       cardNumber: "",
       ownerName: "",
-      month: "",
-      year: "",
+      month: "MM",
+      year: "YY",
       vendorOptions: null,
       bgColor: "#ccc"
     }
