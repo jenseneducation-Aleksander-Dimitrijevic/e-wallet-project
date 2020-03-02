@@ -7,43 +7,27 @@ Vue.config.productionTip = false;
 new Vue({
   router,
   data: () => ({
-    cards: [
-      {
-        id: 1,
-        chip: require("./assets/chip-light.svg"),
-        vendor: require("./assets/vendor-evil.svg"),
-        cardNumber: "0987654321099876",
-        ownerName: "Fernanda Mejia",
-        month: "02",
-        year: "21",
-        bgColor: "#D92E4C"
-      },
-      {
-        id: 2,
-        chip: require("./assets/chip-light.svg"),
-        vendor: require("./assets/vendor-blockchain.svg"),
-        cardNumber: "0987654321099876",
-        ownerName: "Måns Åkesson",
-        month: "05",
-        year: "24",
-        bgColor: "#7C4FDF"
-      },
-      {
-        id: 3,
-        chip: require("./assets/chip-light.svg"),
-        vendor: require("./assets/vendor-ninja.svg"),
-        cardNumber: "1972302917398133",
-        ownerName: "Kalle Karlsson",
-        month: "06",
-        year: "25",
-        bgColor: "#000"
-      }
-    ]
+    cards: []
   }),
   mounted() {
-    this.$root.$on("add-card", data => {
-      this.cards.push(data);
-      console.log(data);
+    if (localStorage.getItem("card")) {
+      try {
+        this.cards = JSON.parse(localStorage.getItem("card"));
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    this.$root.$on("add-card", card => {
+      this.cards.push(card);
+      const parsed = JSON.stringify(this.cards);
+      localStorage.setItem("card", parsed);
+    });
+
+    this.$root.$on("del-card", id => {
+      this.cards = JSON.parse(localStorage.getItem("card"));
+      this.cards = this.cards.filter(card => card.id != id);
+      localStorage.setItem("card", JSON.stringify(this.cards));
     });
   },
   render: h => h(App)

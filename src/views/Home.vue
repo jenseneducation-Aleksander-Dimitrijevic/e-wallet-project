@@ -2,7 +2,8 @@
   <div class="wrapper">
     <Top heading="E-wallet" />
     <h3>Active card</h3>
-    <Card :cardDetail="cardDetail" />
+    <h4 v-if="!card">No active card selected</h4>
+    <Card v-else class="top-card" :cardDetail="card" />
     <CardStack @swap-card="swapCard" />
     <router-link class="btn-primary" to="/add-card">Add new card</router-link>
   </div>
@@ -15,20 +16,15 @@ import CardStack from "../components/CardStack";
 export default {
   name: "Home",
   components: { Top, Card, CardStack },
-  data: () => ({
-    cardDetail: {
-      chip: require("../assets/chip-light.svg"),
-      vendor: require("../assets/vendor-bitcoin.svg"),
-      cardNumber: "1234567891011123",
-      ownerName: "Aleksander Dimitrijevic",
-      month: "10",
-      year: "20",
-      bgColor: "#ffb649"
-    }
-  }),
+
+  data() {
+    return {
+      card: this.$root.cards[0] && 0
+    };
+  },
   methods: {
     swapCard(data) {
-      this.cardDetail = data;
+      this.card = data;
     }
   }
 };
@@ -48,6 +44,18 @@ export default {
     text-align: center;
     margin-bottom: 0.5rem;
     text-transform: uppercase;
+  }
+
+  h4 {
+    text-align: center;
+  }
+
+  .top-card {
+    &:hover {
+      .delete {
+        display: none;
+      }
+    }
   }
 }
 

@@ -4,6 +4,7 @@
     class="card"
     :style="{ 'background-color': cardDetail.bgColor }"
   >
+    <span class="delete" @click="deleteCard">&times;</span>
     <div class="vendor">
       <img :src="cardDetail.chip" alt="vendor" />
       <img :src="cardDetail.vendor" alt="vendor" />
@@ -36,6 +37,14 @@ export default {
       let ccNumSpaces = ccNum.match(/.{1,4}/g);
       return ccNumSpaces.join(" ");
     }
+  },
+  methods: {
+    deleteCard() {
+      if (confirm("Delete this card?")) {
+        this.$root.$emit("del-card", this.cardDetail.id);
+      }
+      return;
+    }
   }
 };
 </script>
@@ -50,11 +59,39 @@ export default {
   padding: 1rem;
   color: #fff;
   flex-flow: column;
+  position: relative;
   border-radius: 10px;
   backface-visibility: hidden;
   justify-content: space-between;
   box-shadow: 0 0 10px rgba(#000, 0.2);
   text-shadow: 0 0 5px rgba(#000, 0.4);
+
+  .delete {
+    width: 30px;
+    height: 30px;
+    top: -10px;
+    right: -10px;
+    padding: 10px;
+    display: flex;
+    color: #fff;
+    font-size: 2rem;
+    background: rgb(219, 26, 26);
+    border-radius: 50%;
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+    transform: scale(0);
+  }
+
+  &:hover {
+    .delete {
+      transition: 0.3s;
+      cursor: pointer;
+      transform: scale(1);
+      box-shadow: 0 0 15px rgba(#000, 0.5);
+    }
+  }
+
   .vendor {
     display: flex;
     align-items: center;

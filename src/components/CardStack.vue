@@ -20,7 +20,7 @@ export default {
   components: { Card },
   computed: {
     cards() {
-      return this.$root.$data.cards;
+      return this.$root.cards;
     }
   }
 };

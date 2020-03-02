@@ -2,7 +2,7 @@
   <div class="wrapper">
     <Top heading="Add a new bank card" />
     <h3>New card</h3>
-    <Card :cardDetail="cardDetail" />
+    <Card :cardDetail="cardDetail" class="top-card" />
     <CardForm @select="changeBgColor" :cardDetail="cardDetail" />
   </div>
 </template>
